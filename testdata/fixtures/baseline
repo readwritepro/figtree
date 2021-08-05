@@ -1,0 +1,45 @@
+# File: baseline 
+
+key2 baseline2
+key3 baseline3
+
+main {
+    section1 {
+        item1-1 baseline1-1    # baseline comment 1-1
+        item1-2 baseline1-2    # baseline comment 1-2
+        item1-3 baseline1-3    # baseline comment 1-3
+    }
+    section2 {
+        item2-1 baseline2-1    # baseline comment 2-1
+        item2-2 baseline2-2    # baseline comment 2-2
+        item2-3 baseline2-3    # baseline comment 2-3
+    }
+    section3 {
+        item3-1 baseline3-1
+        item3-2 baseline3-2
+        item3-3 baseline3-3
+        
+        subsectionA {
+            subitemA-a baselineA-a
+            subitemA-b baselineA-b
+            subitemA-c baselineA-c
+            subitemA-d baselineA-d
+        }
+        subsectionB {
+            subitemB-a baselineB-a
+            subitemB-b baselineB-b
+            subitemB-c baselineB-c
+        }
+    }
+    section4 {
+        array1 baselineA
+        array1 baselineB
+
+        array2 baselineC
+        array2 baselineD
+
+        # baseline array3 not in user
+        array3 baselineE
+        array3 baselineF
+    }
+}

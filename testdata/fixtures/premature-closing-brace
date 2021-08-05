@@ -1,0 +1,4 @@
+# premature-closing-brace
+section {
+    }  #premature
+}

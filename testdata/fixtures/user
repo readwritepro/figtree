@@ -1,0 +1,69 @@
+# File: user
+
+!baseline /pagoda/portrules/figtree/testdata/fixtures/baseline
+
+key1 value1
+key2 value2
+
+main {
+    # user section1 overrides every baseline item
+    section1 {
+        item1-1 value1-1    # comment 1-1
+
+        # item1-2 has a block comment
+        item1-2 value1-2    # comment 1-2
+        
+        # item1-3 hides the baseline's terminal comment
+        item1-3 value1-3
+    }
+
+    # user section2 only overrides item2-2, relying on baseline for item2-1 and item2-3 
+    section2 {
+        item2-2 value2-2    # comment 2-2
+
+        # user section2 has two additional items not in the baseline
+        item2-4 value2-4
+        item2-5 value2-5
+    }
+
+    section3 {
+        # first three section3 items come from baseline
+        
+        subsectionA {
+            # user subsectionA overrides baseline subitemA-a and subitemA-b
+            subitemA-a valueA-a
+            subitemA-b valueA-b
+
+            # subitemA-c and subitemA-d come from baseline
+            
+            # subitemA-e and subitemA-f are not in the baseline
+            subitemA-e valueA-e
+            subitemA-f valueA-f
+        }
+
+        # user has no subsectionB, all defaults come from the baseline
+
+        # user subsectionC is not in the baseline
+        subsectionC {
+            subitemC-a valueC-a
+            subitemC-b valueC-b
+            subitemC-c valueC-c
+        }
+    }
+
+    section4 {
+        # four array1 items override the 2 from baseline
+        array1 valueA
+        array1 valueB
+        array1 valueC
+        array1 valueD
+
+        # one array2 item overrides the 2 from baseline
+        array2 valueA
+
+        # user array4 not in baseline
+        array4 valueA
+        array4 valueB
+        array4 valueC
+    }
+}

@@ -1,0 +1,73 @@
+# this is a base config file that includes other config files
+
+#----- 1 include directly -----
+!include /pagoda/portrules/figtree/testdata/fixtures/include-items
+# file: include-items
+
+# four included key/values
+include1 value 1
+include2 value 2
+include3 value 3
+include4 value 4
+
+#----- 2 include as a section -----
+namedSection-2 {
+	!include /pagoda/portrules/figtree/testdata/fixtures/include-branches
+	# file: include-branches
+	
+	branchA {
+		key5 value 5
+		key6 value 6
+	}
+	
+	branchB {
+		key7 value 7
+		key8 value 8
+		
+		# inner branch
+		branchC {
+			key9 value 9
+			key10 value 10
+		}
+	}
+}
+
+#----- 3 include a file that includes other files -----
+namedSection-3 {
+	!include /pagoda/portrules/figtree/testdata/fixtures/include-includes
+	file: include-includes
+	
+	#----- 4 include items -----
+	namedSection-4 {
+		!include /pagoda/portrules/figtree/testdata/fixtures/include-items
+		# file: include-items
+		
+		# four included key/values
+		include1 value 1
+		include2 value 2
+		include3 value 3
+		include4 value 4
+	}
+	
+	#----- 5 include branches -----
+	namedSection-5 {
+		!include /pagoda/portrules/figtree/testdata/fixtures/include-branches
+		# file: include-branches
+		
+		branchA {
+			key5 value 5
+			key6 value 6
+		}
+		
+		branchB {
+			key7 value 7
+			key8 value 8
+			
+			# inner branch
+			branchC {
+				key9 value 9
+				key10 value 10
+			}
+		}
+	}
+}

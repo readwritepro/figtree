@@ -1,0 +1,17 @@
+# file: include-branches
+
+branchA {
+    key5 value 5
+    key6 value 6
+}
+
+branchB {
+    key7 value 7
+    key8 value 8
+
+    # inner branch
+    branchC {
+        key9 value 9
+        key10 value 10
+    }
+}

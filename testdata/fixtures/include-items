@@ -1,0 +1,7 @@
+# file: include-items
+
+# four included key/values
+include1 value 1
+include2 value 2
+include3 value 3
+include4 value 4

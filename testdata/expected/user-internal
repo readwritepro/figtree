@@ -1,0 +1,86 @@
+(User)[user:3]                   # File: user
+(User)[user:3]                   
+(User)[user:3]                   !baseline /pagoda/portrules/figtree/testdata/fixtures/baseline
+(User)[user:5]                   
+(User)[user:5]                   key1 value1
+(User)[user:6]                   key2 value2
+(Base)[baseline:4]               key3 baseline3
+(User)[user:8]                   
+(User)[user:8]                   main {
+(User)[user:10]                 	 # user section1 overrides every baseline item
+(User)[user:10]                 	 section1 {
+(User)[user:11]                 		 item1-1 value1-1    # comment 1-1
+(User)[user:14]                 		 
+(User)[user:14]                 		 # item1-2 has a block comment
+(User)[user:14]                 		 item1-2 value1-2    # comment 1-2
+(User)[user:17]                 		 
+(User)[user:17]                 		 # item1-3 hides the baseline's terminal comment
+(User)[user:17]                 		 item1-3 value1-3
+(User)[user:10]                 	 }
+(User)[user:21]                 	 
+(User)[user:21]                 	 # user section2 only overrides item2-2, relying on baseline for item2-1 and item2-3
+(User)[user:21]                 	 section2 {
+(Base)[baseline:13]             		 item2-1 baseline2-1    # baseline comment 2-1
+(User)[user:22]                 		 item2-2 value2-2    # comment 2-2
+(Base)[baseline:15]             		 item2-3 baseline2-3    # baseline comment 2-3
+(User)[user:25]                 		 
+(User)[user:25]                 		 # user section2 has two additional items not in the baseline
+(User)[user:25]                 		 item2-4 value2-4
+(User)[user:26]                 		 item2-5 value2-5
+(User)[user:21]                 	 }
+(User)[user:29]                 	 
+(User)[user:29]                 	 section3 {
+(Base)[baseline:18]             		 item3-1 baseline3-1
+(Base)[baseline:19]             		 item3-2 baseline3-2
+(Base)[baseline:20]             		 item3-3 baseline3-3
+(User)[user:32]                 		 # first three section3 items come from baseline
+(User)[user:32]                 		 
+(User)[user:32]                 		 subsectionA {
+(User)[user:34]                 			 # user subsectionA overrides baseline subitemA-a and subitemA-b
+(User)[user:34]                 			 subitemA-a valueA-a
+(User)[user:35]                 			 subitemA-b valueA-b
+(Base)[baseline:25]             			 subitemA-c baselineA-c
+(Base)[baseline:26]             			 subitemA-d baselineA-d
+(User)[user:40]                 			 
+(User)[user:40]                 			 # subitemA-c and subitemA-d come from baseline
+(User)[user:40]                 			 
+(User)[user:40]                 			 # subitemA-e and subitemA-f are not in the baseline
+(User)[user:40]                 			 subitemA-e valueA-e
+(User)[user:41]                 			 subitemA-f valueA-f
+(User)[user:32]                 		 }
+(Base)[baseline:28]             		 subsectionB {
+(Base)[baseline:29]             			 subitemB-a baselineB-a
+(Base)[baseline:30]             			 subitemB-b baselineB-b
+(Base)[baseline:31]             			 subitemB-c baselineB-c
+(Base)[baseline:28]             		 }
+(User)[user:47]                 		 
+(User)[user:47]                 		 # user has no subsectionB, all defaults come from the baseline
+(User)[user:47]                 		 
+(User)[user:47]                 		 # user subsectionC is not in the baseline
+(User)[user:47]                 		 subsectionC {
+(User)[user:48]                 			 subitemC-a valueC-a
+(User)[user:49]                 			 subitemC-b valueC-b
+(User)[user:50]                 			 subitemC-c valueC-c
+(User)[user:47]                 		 }
+(User)[user:29]                 	 }
+(User)[user:54]                 	 
+(User)[user:54]                 	 section4 {
+(User)[user:56]                 		 # four array1 items override the 2 from baseline
+(User)[user:56]                 		 array1 valueA
+(User)[user:57]                 		 array1 valueB
+(User)[user:58]                 		 array1 valueC
+(User)[user:59]                 		 array1 valueD
+(User)[user:62]                 		 
+(User)[user:62]                 		 # one array2 item overrides the 2 from baseline
+(User)[user:62]                 		 array2 valueA
+(Base)[baseline:42]             		 
+(Base)[baseline:42]             		 # baseline array3 not in user
+(Base)[baseline:42]             		 array3 baselineE
+(Base)[baseline:43]             		 array3 baselineF
+(User)[user:65]                 		 
+(User)[user:65]                 		 # user array4 not in baseline
+(User)[user:65]                 		 array4 valueA
+(User)[user:66]                 		 array4 valueB
+(User)[user:67]                 		 array4 valueC
+(User)[user:54]                 	 }
+(User)[user:8]                   }

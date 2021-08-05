@@ -1,0 +1,179 @@
+{
+	"meta": {
+		"filetype": "testdata",
+		"accessor": "go test",
+		"created": "July 22, 2021"
+	},
+	"key1": null,
+	"key2": null,
+	"key3": "value3",
+	"key4": "value4",
+	"key5": "value5",
+	"section1": {
+		"key1": "space-then-value",
+		"key2": "tab-then-value",
+		"key3": "multiple-spaces-then-value"
+	},
+	"section2": {
+		"four-identical-keys": [
+			"value1",
+			"value2",
+			"value3",
+			"value4"
+		]
+	},
+	"section3": {
+		"key3": "value",
+		"sub-section3A": {
+			"key3A": "value3A"
+		}
+	},
+	"section4": {
+		"section4A": {
+			"section4A-1": {
+				"key4A-1": null
+			},
+			"section4A-2": {
+				"key4A-2": null
+			}
+		},
+		"section4B": {
+			"section4B-1": {
+				"key4B-1": null
+			},
+			"section4B-2": {
+				"key4B-2": null
+			}
+		}
+	},
+	"section5": {
+		"key5": "value5"
+	},
+	"section6": {
+		"key6": "value6"
+	},
+	"section7": {
+		"with-dash": null,
+		"with_underscore": null,
+		"with}right}brace": null,
+		"with\\reverse\\solidus": null,
+		"(with-parentheses)": null,
+		"[with-square-brackets]": null,
+		"~with-tilde": null,
+		"!with-exclamation": null,
+		"@with-at-sign": null,
+		"*with-asterisk": null,
+		"$with-dollar-sign": null
+	},
+	"section8": {
+		"key": [
+			"(parentheses)",
+			"{braces}",
+			"{braces}",
+			"[brackets]",
+			"<html>",
+			"\"double quotes\"",
+			"'single quotes'",
+			"`grave accents`",
+			"hash#tag",
+			"https://example.com#bookmark",
+			"https://example.com#bookmark",
+			null,
+			null,
+			true,
+			false,
+			1,
+			1.2,
+			"1-2-3",
+			-4,
+			1.2345678901E10,
+			"left side = right side"
+		]
+	},
+	"section9": {
+		"key-with-\"quotes\"": null,
+		"key-with-\\reverse-solidus\\": null,
+		"key-with-\"-\\-both": null,
+		"key-with-\\-\"-both": null,
+		"key0": "value-with-\"quotes\"",
+		"key1": "value-with-\\reverse-solidus\\",
+		"key2": "value-with-\"-\\-both",
+		"key3": "value-with-\\-\"-both"
+	},
+	"section10": {
+		"-": [
+			"dash1",
+			"dash2"
+		],
+		">": [
+			"gt1",
+			"gt2"
+		],
+		"<": [
+			"lt1",
+			"lt2"
+		],
+		"=": [
+			"eq1",
+			"eq2"
+		],
+		"!": [
+			"not1",
+			"not2"
+		]
+	},
+	"section11": {
+		"&&": "and",
+		"||": "or"
+	},
+	"section12": {
+		"no-members": [
+
+		],
+		"one-member-only": [
+			"value0"
+		],
+		"two-members": [
+			"value1",
+			"value2"
+		]
+	},
+	"section13": {
+		"objects": [
+			{
+				"key1": "value1"
+			},
+			{
+				"key2": "value2",
+				"key3": "value3"
+			},
+			{
+				"key4": "value4",
+				"key5": "value5",
+				"key6": "value6"
+			}
+		]
+	},
+	"section14": {
+		"objects": [
+			{
+				"key1": "value1"
+			},
+			{
+				"key2": "value2",
+				"key3": "value3"
+			},
+			{
+				"key4": "value4",
+				"key5": "value5",
+				"key6": "value6"
+			}
+		]
+	},
+	"section15": {
+		"section16": {
+			"section17": {
+			}
+		}
+	}
+}

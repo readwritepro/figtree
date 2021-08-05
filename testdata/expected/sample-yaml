@@ -1,0 +1,174 @@
+---
+meta:
+  filetype: testdata
+  accessor: go test
+  created: "July 22, 2021"
+
+# root branch key/value items
+key1: null 
+key2: null # LIMITATION: whitespace is not retained between key-with-no-value and comment
+key3: value3
+key4: value4			# tabs-ws + terminal comment
+key5: value5         # spaces-ws + terminal comment
+
+section1:
+  key1: "space-then-value"
+  key2: "tab-then-value"					# LIMITATION: tab between key and value is converted to single space
+  key3: "multiple-spaces-then-value"		# LIMITATION: multiple whitespace between key and value is converted to single space
+
+section2:
+  "four-identical-keys":
+    - value1
+    - value2
+    - value3
+    - value4
+
+# This block comment and its section are indented
+# in the configuration, but will be properly tab-indented
+# in the output.
+section3:
+  key3: value		# comment
+  "sub-section3A":
+    key3A: value3A
+
+# nested sections needing tab-indent linting
+section4:
+  section4A:
+    "section4A-1":
+      "key4A-1": null 
+    "section4A-2":
+      "key4A-2": null 
+  section4B:
+    "section4B-1":
+      "key4B-1": null 
+    "section4B-2":
+      "key4B-2": null 
+
+# section with no space before { should be honored
+section5:
+  key5: value5
+
+section6: 	# section with terminal comment
+  key6: value6
+
+# stress testing key names
+section7:
+  "with-dash": null 
+  with_underscore: null 
+  # with{left{brace		# LIMITATION: left brace not allowed within keyname
+  "with}right}brace": null 
+  # with/solidus			# LIMITATION: solidus not allowed within keyname
+  "with\\reverse\\solidus": null 
+  "(with-parentheses)": null 
+  "[with-square-brackets]": null 
+  "~with-tilde": null 
+  "!with-exclamation": null 
+  "@with-at-sign": null 
+  # with#interior#hash	# LIMITATION: hash not allowed within keyname
+  "*with-asterisk": null 
+  "$with-dollar-sign": null 
+
+# stress testing values
+section8:
+  key:
+    - (parentheses)
+    - "{braces}"
+    - "{braces}"			# braces are allowed in values
+    - "[brackets]"
+    - "<html>"
+    - "\"double quotes\""
+    - "\'single quotes\'"
+    - "`grave accents`"
+    - "hash#tag"
+    - "https://example.com#bookmark"
+    - "https://example.com#bookmark"		# bookmark and terminal comment
+    - null 
+    - null
+    - true
+    - false
+    - 1
+    - 1.2
+    - "1-2-3"
+    - -4
+    - 1.2345678901E10
+    - left side = right side
+
+# strings that need escaping when writing to JSON
+section9:
+  "key-with-\"quotes\"": null 
+  "key-with-\\reverse-solidus\\": null 
+  "key-with-\"-\\-both": null 
+  "key-with-\\-\"-both": null 
+  
+  key0: "value-with-\"quotes\""
+  key1: "value-with-\\reverse-solidus\\"
+  key2: "value-with-\"-\\-both"
+  key3: "value-with-\\-\"-both"
+
+# multiple values using single letter keys
+section10:
+  "-":
+    - dash1
+    - dash2
+  ">":
+    - gt1
+    - gt2
+  <:
+    - lt1
+    - lt2
+  =:
+    - eq1
+    - eq2
+  "!":
+    - not1
+    - not2
+
+# interesting key possibilities
+section11:
+  "&&": and
+  "||": or
+
+# special hack for JSON arrays with 0 or 1 member where the [] indicates an array
+section12:
+  "no-members": [] # this will become keyName "no-members" without any entries
+  "one-member-only":
+    - value0		# this will become keyName "one-member-only" with one entry
+  "two-members":
+    - value1			# two-members (first one)
+    - value2			# two-members (second one)
+
+# an array of objects
+section13:
+  objects:
+    -
+      key1: value1
+    -
+      key2: value2
+      key3: value3
+    -
+      key4: value4
+      key5: value5
+      key6: value6
+
+# an array of objects
+section14:
+  objects:
+    -
+      key1: value1
+    -
+      key2: value2
+      key3: value3
+    -
+      key4: value4
+      key5: value5
+      key6: value6
+
+# block comment
+section15:
+  
+  # indented block comment
+  section16:
+    
+    # doubly indented block comment
+    section17:
+

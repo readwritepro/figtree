@@ -1,0 +1,192 @@
+(User)[sample:1]                 meta {
+(User)[sample:2]                	 filetype testdata
+(User)[sample:3]                	 accessor go test
+(User)[sample:4]                	 created July 22, 2021
+(User)[sample:1]                 }
+(User)[sample:8]                 
+(User)[sample:8]                 # root branch key/value items
+(User)[sample:8]                 key1 
+(User)[sample:9]                 key2 # LIMITATION: whitespace is not retained between key-with-no-value and comment
+(User)[sample:10]                key3 value3
+(User)[sample:11]                key4 value4			# tabs-ws + terminal comment
+(User)[sample:12]                key5 value5         # spaces-ws + terminal comment
+(User)[sample:14]                
+(User)[sample:14]                section1 {
+(User)[sample:15]               	 key1 space-then-value
+(User)[sample:16]               	 key2 tab-then-value					# LIMITATION: tab between key and value is converted to single space
+(User)[sample:17]               	 key3 multiple-spaces-then-value		# LIMITATION: multiple whitespace between key and value is converted to single space
+(User)[sample:14]                }
+(User)[sample:20]                
+(User)[sample:20]                section2 {
+(User)[sample:21]               	 four-identical-keys value1
+(User)[sample:22]               	 four-identical-keys value2
+(User)[sample:23]               	 four-identical-keys value3
+(User)[sample:24]               	 four-identical-keys value4
+(User)[sample:20]                }
+(User)[sample:30]                
+(User)[sample:30]                # This block comment and its section are indented
+(User)[sample:30]                # in the configuration, but will be properly tab-indented
+(User)[sample:30]                # in the output.
+(User)[sample:30]                section3 {
+(User)[sample:31]               	 key3 value		# comment
+(User)[sample:32]               	 sub-section3A {
+(User)[sample:33]               		 key3A value3A
+(User)[sample:32]               	 }
+(User)[sample:30]                }
+(User)[sample:38]                
+(User)[sample:38]                # nested sections needing tab-indent linting
+(User)[sample:38]                section4 {
+(User)[sample:39]               	 section4A {
+(User)[sample:40]               		 section4A-1 {
+(User)[sample:41]               			 key4A-1 
+(User)[sample:40]               		 }
+(User)[sample:43]               		 section4A-2 {
+(User)[sample:44]               			 key4A-2 
+(User)[sample:43]               		 }
+(User)[sample:39]               	 }
+(User)[sample:47]               	 section4B {
+(User)[sample:48]               		 section4B-1 {
+(User)[sample:49]               			 key4B-1 
+(User)[sample:48]               		 }
+(User)[sample:51]               		 section4B-2 {
+(User)[sample:52]               			 key4B-2 
+(User)[sample:51]               		 }
+(User)[sample:47]               	 }
+(User)[sample:38]                }
+(User)[sample:58]                
+(User)[sample:58]                # section with no space before { should be honored
+(User)[sample:58]                section5 {
+(User)[sample:59]               	 key5 value5
+(User)[sample:58]                }
+(User)[sample:62]                
+(User)[sample:62]                section6 { 	# section with terminal comment
+(User)[sample:63]               	 key6 value6
+(User)[sample:62]                }
+(User)[sample:67]                
+(User)[sample:67]                # stress testing key names
+(User)[sample:67]                section7 {
+(User)[sample:68]               	 with-dash 
+(User)[sample:69]               	 with_underscore 
+(User)[sample:71]               	 # with{left{brace		# LIMITATION: left brace not allowed within keyname
+(User)[sample:71]               	 with}right}brace 
+(User)[sample:73]               	 # with/solidus			# LIMITATION: solidus not allowed within keyname
+(User)[sample:73]               	 with\reverse\solidus 
+(User)[sample:74]               	 (with-parentheses) 
+(User)[sample:75]               	 [with-square-brackets] 
+(User)[sample:76]               	 ~with-tilde 
+(User)[sample:77]               	 !with-exclamation 
+(User)[sample:78]               	 @with-at-sign 
+(User)[sample:80]               	 # with#interior#hash	# LIMITATION: hash not allowed within keyname
+(User)[sample:80]               	 *with-asterisk 
+(User)[sample:81]               	 $with-dollar-sign 
+(User)[sample:67]                }
+(User)[sample:85]                
+(User)[sample:85]                # stress testing values
+(User)[sample:85]                section8 {
+(User)[sample:86]               	 key (parentheses)
+(User)[sample:87]               	 key {braces}
+(User)[sample:88]               	 key {braces}			# braces are allowed in values
+(User)[sample:89]               	 key [brackets]
+(User)[sample:90]               	 key <html>
+(User)[sample:91]               	 key "double quotes"
+(User)[sample:92]               	 key 'single quotes'
+(User)[sample:93]               	 key `grave accents`
+(User)[sample:94]               	 key hash#tag
+(User)[sample:95]               	 key https://example.com#bookmark
+(User)[sample:96]               	 key https://example.com#bookmark		# bookmark and terminal comment
+(User)[sample:97]               	 key 
+(User)[sample:98]               	 key null
+(User)[sample:99]               	 key true
+(User)[sample:100]              	 key false
+(User)[sample:101]              	 key 1
+(User)[sample:102]              	 key 1.2
+(User)[sample:103]              	 key 1-2-3
+(User)[sample:104]              	 key -4
+(User)[sample:105]              	 key 1.2345678901E10
+(User)[sample:106]              	 key left side = right side
+(User)[sample:85]                }
+(User)[sample:110]               
+(User)[sample:110]               # strings that need escaping when writing to JSON
+(User)[sample:110]               section9 {
+(User)[sample:111]              	 key-with-"quotes" 
+(User)[sample:112]              	 key-with-\reverse-solidus\ 
+(User)[sample:113]              	 key-with-"-\-both 
+(User)[sample:114]              	 key-with-\-"-both 
+(User)[sample:116]              	 
+(User)[sample:116]              	 key0 value-with-"quotes"
+(User)[sample:117]              	 key1 value-with-\reverse-solidus\
+(User)[sample:118]              	 key2 value-with-"-\-both
+(User)[sample:119]              	 key3 value-with-\-"-both
+(User)[sample:110]               }
+(User)[sample:123]               
+(User)[sample:123]               # multiple values using single letter keys
+(User)[sample:123]               section10 {
+(User)[sample:124]              	 - dash1
+(User)[sample:125]              	 - dash2
+(User)[sample:126]              	 > gt1
+(User)[sample:127]              	 > gt2
+(User)[sample:128]              	 < lt1
+(User)[sample:129]              	 < lt2
+(User)[sample:130]              	 = eq1
+(User)[sample:131]              	 = eq2
+(User)[sample:132]              	 ! not1
+(User)[sample:133]              	 ! not2
+(User)[sample:123]               }
+(User)[sample:137]               
+(User)[sample:137]               # interesting key possibilities
+(User)[sample:137]               section11 {
+(User)[sample:138]              	 && and
+(User)[sample:139]              	 || or
+(User)[sample:137]               }
+(User)[sample:143]               
+(User)[sample:143]               # special hack for JSON arrays with 0 or 1 member where the [] indicates an array
+(User)[sample:143]               section12 {
+(User)[sample:144]              	 no-members[] # this will become keyName "no-members" without any entries
+(User)[sample:145]              	 one-member-only[] value0		# this will become keyName "one-member-only" with one entry
+(User)[sample:146]              	 two-members[] value1			# two-members (first one)
+(User)[sample:147]              	 two-members[] value2			# two-members (second one)
+(User)[sample:143]               }
+(User)[sample:151]               
+(User)[sample:151]               # an array of objects
+(User)[sample:151]               section13 {
+(User)[sample:152]              	 objects {
+(User)[sample:153]              		 key1 value1
+(User)[sample:152]              	 }
+(User)[sample:155]              	 objects {
+(User)[sample:156]              		 key2 value2
+(User)[sample:157]              		 key3 value3
+(User)[sample:155]              	 }
+(User)[sample:159]              	 objects {
+(User)[sample:160]              		 key4 value4
+(User)[sample:161]              		 key5 value5
+(User)[sample:162]              		 key6 value6
+(User)[sample:159]              	 }
+(User)[sample:151]               }
+(User)[sample:167]               
+(User)[sample:167]               # an array of objects
+(User)[sample:167]               section14 {
+(User)[sample:168]              	 objects[] {
+(User)[sample:169]              		 key1 value1
+(User)[sample:168]              	 }
+(User)[sample:171]              	 objects[] {
+(User)[sample:172]              		 key2 value2
+(User)[sample:173]              		 key3 value3
+(User)[sample:171]              	 }
+(User)[sample:175]              	 objects[] {
+(User)[sample:176]              		 key4 value4
+(User)[sample:177]              		 key5 value5
+(User)[sample:178]              		 key6 value6
+(User)[sample:175]              	 }
+(User)[sample:167]               }
+(User)[sample:183]               
+(User)[sample:183]               # block comment
+(User)[sample:183]               section15 {
+(User)[sample:186]              	 
+(User)[sample:186]              	 # indented block comment
+(User)[sample:186]              	 section16 {
+(User)[sample:189]              		 
+(User)[sample:189]              		 # doubly indented block comment
+(User)[sample:189]              		 section17 {
+(User)[sample:189]              		 }
+(User)[sample:186]              	 }
+(User)[sample:183]               }

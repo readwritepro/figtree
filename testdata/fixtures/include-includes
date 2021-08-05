@@ -1,0 +1,11 @@
+file: include-includes
+
+#----- 4 include items -----
+namedSection-4 {
+    !include /pagoda/portrules/figtree/testdata/fixtures/include-items
+}
+
+#----- 5 include branches -----
+namedSection-5 {
+    !include /pagoda/portrules/figtree/testdata/fixtures/include-branches
+}

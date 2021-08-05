@@ -1,0 +1,195 @@
+meta {
+	filetype testdata
+	accessor go test
+	created July 22, 2021
+}
+
+# root branch key/value items
+key1 
+key2				# LIMITATION: whitespace is not retained between key-with-no-value and comment
+key3 value3
+key4 value4			# tabs-ws + terminal comment
+key5 value5         # spaces-ws + terminal comment
+
+section1 {
+	key1 space-then-value
+	key2	tab-then-value					# LIMITATION: tab between key and value is converted to single space
+	key3         multiple-spaces-then-value		# LIMITATION: multiple whitespace between key and value is converted to single space
+}
+
+section2 {
+	four-identical-keys value1
+	four-identical-keys value2
+	four-identical-keys value3
+	four-identical-keys value4
+}
+
+	# This block comment and its section are indented
+	# in the configuration, but will be properly tab-indented
+	# in the output.
+	section3 {
+		key3 value		# comment
+		sub-section3A {
+			key3A value3A
+		}
+	}
+
+# nested sections needing tab-indent linting
+section4 {
+section4A {
+section4A-1 {
+key4A-1
+}
+section4A-2 {
+key4A-2
+}
+}	
+section4B {
+section4B-1 {
+key4B-1
+}
+section4B-2 {
+key4B-2
+}
+}	
+}
+
+# section with no space before { should be honored
+section5{	
+	key5 value5
+}
+
+section6 { 	# section with terminal comment
+	key6 value6
+} # LIMITATION: trailing comments on closing brace are not retained
+
+# stress testing key names
+section7 {
+	with-dash
+	with_underscore
+	# with{left{brace		# LIMITATION: left brace not allowed within keyname
+	with}right}brace
+	# with/solidus			# LIMITATION: solidus not allowed within keyname
+	with\reverse\solidus
+	(with-parentheses)
+	[with-square-brackets]
+	~with-tilde
+	!with-exclamation
+	@with-at-sign
+	# with#interior#hash	# LIMITATION: hash not allowed within keyname
+	*with-asterisk
+	$with-dollar-sign
+}
+
+# stress testing values
+section8 {
+	key (parentheses)
+	key {braces}
+	key {braces}			# braces are allowed in values
+	key [brackets]
+	key <html>
+	key "double quotes"
+	key 'single quotes'
+	key `grave accents`
+	key hash#tag
+	key https://example.com#bookmark
+	key https://example.com#bookmark		# bookmark and terminal comment
+	key
+	key null
+	key true
+	key false
+	key 1
+	key 1.2
+	key 1-2-3
+	key -4
+	key 1.2345678901E10
+	key left side = right side
+}
+
+# strings that need escaping when writing to JSON
+section9 {
+	key-with-"quotes"
+	key-with-\reverse-solidus\
+	key-with-"-\-both
+	key-with-\-"-both
+	
+	key0 value-with-"quotes"
+	key1 value-with-\reverse-solidus\
+	key2 value-with-"-\-both
+	key3 value-with-\-"-both
+}
+
+# multiple values using single letter keys
+section10 {
+	- dash1
+	- dash2
+	> gt1
+	> gt2
+	< lt1
+	< lt2
+	= eq1
+	= eq2
+	! not1
+	! not2
+}
+
+# interesting key possibilities
+section11 {
+	&& and
+	|| or
+}
+
+# special hack for JSON arrays with 0 or 1 member where the [] indicates an array
+section12 {
+	no-members[] 					# this will become keyName "no-members" without any entries
+	one-member-only[] value0		# this will become keyName "one-member-only" with one entry
+	two-members[] value1			# two-members (first one)	
+	two-members[] value2			# two-members (second one)	
+}
+
+# an array of objects
+section13 {
+	objects {
+		key1 value1
+	}
+	objects {
+		key2 value2
+		key3 value3
+	}
+	objects {
+		key4 value4
+		key5 value5
+		key6 value6
+	}
+}
+
+# an array of objects
+section14 {
+	objects[] {
+		key1 value1
+	}
+	objects[] {
+		key2 value2
+		key3 value3
+	}
+	objects[] {
+		key4 value4
+		key5 value5
+		key6 value6
+	}
+}
+
+# block comment
+section15 {
+
+	# indented block comment
+	section16 {
+		
+		# doubly indented block comment
+		section17 {
+			# LIMITATION: block comment without any other item not retained
+		}
+	}
+}
+
+# LIMITATION: block comment without a subsequent item not retained

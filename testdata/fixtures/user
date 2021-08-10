@@ -1,6 +1,6 @@
 # File: user
 
-!baseline /pagoda/portrules/figtree/testdata/fixtures/baseline
+!baseline /pagoda/figtree/testdata/fixtures/baseline
 
 key1 value1
 key2 value2

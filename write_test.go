@@ -6,21 +6,22 @@
 //           yamlWriter with and without includes
 //=============================================================================
 
-package figtree
+package figtree_test
 
 import (
 	"testing"
 
-	"github.com/joehonton/compare-files"
+	"github.com/readwritepro/compare-test-results"
+	"github.com/readwritepro/figtree"
 )
 
-func TestFigtreeWriter(t *testing.T) {
+func TestWriteFigtree(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, _ := ReadConfig(inFilename)
+	root, _ := figtree.ReadConfig(inFilename)
 
-	pw := FigtreeWriter{}
+	wf := figtree.WriteFigtree{}
 	outFilename := "testdata/actual/sample-figtree"
-	err := root.WriteToFile(pw, outFilename)
+	err := root.WriteToFile(wf, outFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
@@ -30,15 +31,15 @@ func TestFigtreeWriter(t *testing.T) {
 
 func TestFigtreeIncludes(t *testing.T) {
 	inFilename := "testdata/fixtures/include-base"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
 	}
 
-	pw := FigtreeWriter{}
+	wf := figtree.WriteFigtree{}
 	outFilename := "testdata/actual/include-figtree"
-	err = root.WriteToFile(pw, outFilename)
+	err = root.WriteToFile(wf, outFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
@@ -48,9 +49,9 @@ func TestFigtreeIncludes(t *testing.T) {
 
 func TestInternalWriter(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, _ := ReadConfig(inFilename)
+	root, _ := figtree.ReadConfig(inFilename)
 
-	iw := InternalWriter{}
+	iw := figtree.WriteInternal{}
 	outFilename := "testdata/actual/sample-internal"
 	err := root.WriteToFile(iw, outFilename)
 	if err != nil {
@@ -62,15 +63,15 @@ func TestInternalWriter(t *testing.T) {
 
 func TestInternalIncludes(t *testing.T) {
 	inFilename := "testdata/fixtures/include-base"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
 	}
 
-	iw := InternalWriter{}
+	wi := figtree.WriteInternal{}
 	outFilename := "testdata/actual/include-internal"
-	err = root.WriteToFile(iw, outFilename)
+	err = root.WriteToFile(wi, outFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
@@ -80,9 +81,9 @@ func TestInternalIncludes(t *testing.T) {
 
 func TestJsonWriter(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, _ := ReadConfig(inFilename)
+	root, _ := figtree.ReadConfig(inFilename)
 
-	jw := JsonWriter{}
+	jw := figtree.WriteJson{}
 	outFilename := "testdata/actual/sample-json"
 	err := root.WriteToFile(jw, outFilename)
 	if err != nil {
@@ -94,15 +95,15 @@ func TestJsonWriter(t *testing.T) {
 
 func TestJsonIncludes(t *testing.T) {
 	inFilename := "testdata/fixtures/include-base"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
 	}
 
-	jw := JsonWriter{}
+	wj := figtree.WriteJson{}
 	outFilename := "testdata/actual/include-json"
-	err = root.WriteToFile(jw, outFilename)
+	err = root.WriteToFile(wj, outFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
@@ -112,9 +113,9 @@ func TestJsonIncludes(t *testing.T) {
 
 func TestYamlWriter(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, _ := ReadConfig(inFilename)
+	root, _ := figtree.ReadConfig(inFilename)
 
-	yw := YamlWriter{}
+	yw := figtree.WriteYaml{}
 	outFilename := "testdata/actual/sample-yaml"
 	err := root.WriteToFile(yw, outFilename)
 	if err != nil {
@@ -126,15 +127,15 @@ func TestYamlWriter(t *testing.T) {
 
 func TestYamlIncludes(t *testing.T) {
 	inFilename := "testdata/fixtures/include-base"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
 	}
 
-	jw := YamlWriter{}
+	yw := figtree.WriteYaml{}
 	outFilename := "testdata/actual/include-yaml"
-	err = root.WriteToFile(jw, outFilename)
+	err = root.WriteToFile(yw, outFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 	}

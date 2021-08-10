@@ -1,6 +1,6 @@
 (User)[user:3]                   # File: user
 (User)[user:3]                   
-(User)[user:3]                   !baseline /pagoda/portrules/figtree/testdata/fixtures/baseline
+(User)[user:3]                   !baseline /pagoda/figtree/testdata/fixtures/baseline
 (User)[user:5]                   
 (User)[user:5]                   key1 value1
 (User)[user:6]                   key2 value2

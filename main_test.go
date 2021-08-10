@@ -3,7 +3,7 @@
 // Contents: SETUP and TEARDOWN for tests
 //=============================================================================
 
-package figtree
+package figtree_test
 
 import (
 	"fmt"

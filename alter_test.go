@@ -4,22 +4,21 @@
 //         Branch.InsertBeforeItem
 //         Branch.InsertAfterItem
 //         Branch.RemoveItem
-//         FigtreeWriter.WriteToBuffer
+//         WriteFigtree.WriteToBuffer
 //=============================================================================
 
-package figtree
+package figtree_test
 
 import (
 	"testing"
+
+	"github.com/readwritepro/figtree"
 )
 
 func TestAppendItem(t *testing.T) {
-	root := NewBranch()
+	root := figtree.NewBranch()
 
-	keyval1 := Item{
-		key:   "key1",
-		value: "value1",
-	}
+	keyval1 := figtree.NewItem("key1", "value1")
 
 	root.AppendItem(keyval1)
 	actual, _ := root.GetValue("/key1")
@@ -31,26 +30,16 @@ func TestAppendItem(t *testing.T) {
 }
 
 func TestInsertBeforeItem(t *testing.T) {
-	root := NewBranch()
+	root := figtree.NewBranch()
 
-	keyval0 := Item{
-		key:   "key0",
-		value: "value0",
-	}
-	keyval1 := Item{
-		key:   "key1",
-		value: "value1",
-	}
-
-	keyval2 := Item{
-		key:   "key2",
-		value: "value2",
-	}
+	keyval0 := figtree.NewItem("key0", "value0")
+	keyval1 := figtree.NewItem("key1", "value1")
+	keyval2 := figtree.NewItem("key2", "value2")
 
 	// exercise the "not found" case
 	err := root.InsertBeforeItem("key2", keyval0)
-	if err != ErrNotFound {
-		t.Errorf("expected '%v', got '%v'", ErrNotFound, err)
+	if err != figtree.ErrNotFound {
+		t.Errorf("expected '%v', got '%v'", figtree.ErrNotFound, err)
 	}
 
 	// add items 2, 0, 1
@@ -59,8 +48,8 @@ func TestInsertBeforeItem(t *testing.T) {
 	root.InsertBeforeItem("key2", keyval1) // insert before last item, after first item
 
 	// result should be ordered 0, 1, 2
-	fw := FigtreeWriter{}
-	actual, _ := root.WriteToBuffer(fw)
+	wf := figtree.WriteFigtree{}
+	actual, _ := root.WriteToBuffer(wf)
 	expected := "key0 value0\nkey1 value1\nkey2 value2\n"
 
 	if expected != actual {
@@ -69,26 +58,16 @@ func TestInsertBeforeItem(t *testing.T) {
 }
 
 func TestInsertAfterItem(t *testing.T) {
-	root := NewBranch()
+	root := figtree.NewBranch()
 
-	keyval0 := Item{
-		key:   "key0",
-		value: "value0",
-	}
-	keyval1 := Item{
-		key:   "key1",
-		value: "value1",
-	}
-
-	keyval2 := Item{
-		key:   "key2",
-		value: "value2",
-	}
+	keyval0 := figtree.NewItem("key0", "value0")
+	keyval1 := figtree.NewItem("key1", "value1")
+	keyval2 := figtree.NewItem("key2", "value2")
 
 	// exercise the "not found" case
 	err := root.InsertAfterItem("key0", keyval1)
-	if err != ErrNotFound {
-		t.Errorf("expected '%v', got '%v'", ErrNotFound, err)
+	if err != figtree.ErrNotFound {
+		t.Errorf("expected '%v', got '%v'", figtree.ErrNotFound, err)
 	}
 
 	// add items 0, 1, 2
@@ -97,8 +76,8 @@ func TestInsertAfterItem(t *testing.T) {
 	root.InsertAfterItem("key0", keyval1) // insert after first item, before second item
 
 	// result should be ordered 0, 1, 2
-	fw := FigtreeWriter{}
-	actual, _ := root.WriteToBuffer(fw)
+	wf := figtree.WriteFigtree{}
+	actual, _ := root.WriteToBuffer(wf)
 	expected := "key0 value0\nkey1 value1\nkey2 value2\n"
 
 	if expected != actual {
@@ -107,26 +86,16 @@ func TestInsertAfterItem(t *testing.T) {
 }
 
 func TestRemoveItem(t *testing.T) {
-	root := NewBranch()
+	root := figtree.NewBranch()
 
-	keyval0 := Item{
-		key:   "key0",
-		value: "value0",
-	}
-	keyval1 := Item{
-		key:   "key1",
-		value: "value1",
-	}
-
-	keyval2 := Item{
-		key:   "key2",
-		value: "value2",
-	}
+	keyval0 := figtree.NewItem("key0", "value0")
+	keyval1 := figtree.NewItem("key1", "value1")
+	keyval2 := figtree.NewItem("key2", "value2")
 
 	// exercise the "not found" case
 	err := root.RemoveItem("key0")
-	if err != ErrNotFound {
-		t.Errorf("expected '%v', got '%v'", ErrNotFound, err)
+	if err != figtree.ErrNotFound {
+		t.Errorf("expected '%v', got '%v'", figtree.ErrNotFound, err)
 	}
 
 	// add items 0, 1, 2
@@ -139,8 +108,8 @@ func TestRemoveItem(t *testing.T) {
 	root.RemoveItem("key1") // remove last item, leaving nothing
 
 	// result should be ordered nothing
-	fw := FigtreeWriter{}
-	actual, _ := root.WriteToBuffer(fw)
+	wf := figtree.WriteFigtree{}
+	actual, _ := root.WriteToBuffer(wf)
 	expected := ""
 
 	if expected != actual {

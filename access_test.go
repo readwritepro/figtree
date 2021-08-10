@@ -9,16 +9,18 @@
 //         PathExists
 //=============================================================================
 
-package figtree
+package figtree_test
 
 import (
 	"fmt"
 	"testing"
+
+	"github.com/readwritepro/figtree"
 )
 
 func TestQueryAll(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
@@ -41,7 +43,7 @@ func TestQueryAll(t *testing.T) {
 
 func TestQueryOne(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
@@ -76,7 +78,7 @@ func TestQueryOne(t *testing.T) {
 	}
 
 	_, err = root.QueryOne("section1/key99")
-	expectedErr := ErrNotFound
+	expectedErr := figtree.ErrNotFound
 	if expectedErr != err {
 		t.Errorf("expected '%v', got '%v'", expectedErr, err)
 	}
@@ -84,7 +86,7 @@ func TestQueryOne(t *testing.T) {
 
 func TestGetItem(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
@@ -109,7 +111,7 @@ func TestGetItem(t *testing.T) {
 	}
 
 	_, err = root.GetItem("section1/key99")
-	expectedErr = ErrNotFound
+	expectedErr = figtree.ErrNotFound
 	if expectedErr != err {
 		t.Errorf("expected '%v', got '%v'", expectedErr, err)
 	}
@@ -117,7 +119,7 @@ func TestGetItem(t *testing.T) {
 
 func TestGetBranch(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
@@ -131,13 +133,13 @@ func TestGetBranch(t *testing.T) {
 	}
 
 	_, err = root.GetBranch("section1/key1")
-	expectedErr := ErrNotBranch
+	expectedErr := figtree.ErrNotBranch
 	if expectedErr != err {
 		t.Errorf("expected '%v', got '%v'", expectedErr, err)
 	}
 
 	_, err = root.GetBranch("section1/key99")
-	expectedErr = ErrNotFound
+	expectedErr = figtree.ErrNotFound
 	if expectedErr != err {
 		t.Errorf("expected '%v', got '%v'", expectedErr, err)
 	}
@@ -145,7 +147,7 @@ func TestGetBranch(t *testing.T) {
 
 func TestGetValue(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
@@ -158,7 +160,7 @@ func TestGetValue(t *testing.T) {
 	}
 
 	_, err = root.GetValue("section1")
-	expectedErr := ErrNotLeaf
+	expectedErr := figtree.ErrNotLeaf
 	if expectedErr != err {
 		t.Errorf("expected '%v', got '%v'", expectedErr, err)
 	}
@@ -176,7 +178,7 @@ func TestGetValue(t *testing.T) {
 	}
 
 	_, err = root.GetValue("section1/key99")
-	expectedErr = ErrNotFound
+	expectedErr = figtree.ErrNotFound
 	if expectedErr != err {
 		t.Errorf("expected '%v', got '%v'", expectedErr, err)
 	}
@@ -184,7 +186,7 @@ func TestGetValue(t *testing.T) {
 
 func TestItemExists(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
@@ -211,7 +213,7 @@ func TestItemExists(t *testing.T) {
 }
 func TestItemIsArray(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
@@ -238,7 +240,7 @@ func TestItemIsArray(t *testing.T) {
 }
 func TestPathExists(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 		return

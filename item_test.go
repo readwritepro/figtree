@@ -3,18 +3,19 @@
 // Tests:    Type, Key, SetKey, Value, SetValue, Branch, SetBranch
 //=============================================================================
 
-package figtree
+package figtree_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/readwritepro/figtree"
+)
 
 func TestItem(t *testing.T) {
 	var actual, actualType, expected string
 	var actualErr, expectedErr error
 
-	item := Item{
-		key:   "key1",
-		value: "value1",
-	}
+	item := figtree.NewItem("key1", "value1")
 
 	// change the key
 	item.SetKey("new key")
@@ -33,7 +34,7 @@ func TestItem(t *testing.T) {
 	}
 
 	// change type from [leaf] to [branch]
-	item.SetBranch(NewBranch())
+	item.SetBranch(figtree.NewBranch())
 	actualType = item.Type()
 	expected = "[branch]"
 	if expected != actualType {
@@ -42,7 +43,7 @@ func TestItem(t *testing.T) {
 
 	// attempt to incorrectly use the item as a leaf
 	actual, actualErr = item.Value()
-	expectedErr = ErrNotLeaf
+	expectedErr = figtree.ErrNotLeaf
 	if expectedErr != actualErr {
 		t.Errorf("expected '%v', got '%v'", expectedErr, actualErr)
 	}
@@ -57,8 +58,8 @@ func TestItem(t *testing.T) {
 
 	// attempt to incorrectly use the item as a branch
 	_, actualErr = item.Branch()
-	expectedErr = ErrNotBranch
-	if expectedErr != ErrNotBranch {
+	expectedErr = figtree.ErrNotBranch
+	if expectedErr != figtree.ErrNotBranch {
 		t.Errorf("expected '%v', got '%v'", expectedErr, actualErr)
 	}
 

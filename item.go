@@ -11,9 +11,8 @@ package figtree
 // The struct's key and value are publicly accessible via the Key, SetKey, Value, SetValue,
 // Branch, and SetBranch functions.
 //
-// Private fields:
+// Private fields
 //
-// The path field contains the absolute keyName path, which is the sequence of keyName branches leading to this item.
 // The blockComments field contains any empty lines or block comment lines that immediately preceed this item.
 // The terminalWhitespace field is a string containing the tabs and spaces that separate the value and the terminalComment, if any.
 // The terminalComment field contains any comment situated on the same line, to the right of the item's value.
@@ -29,7 +28,16 @@ type Item struct {
 	srcOrigin          FileOrigin
 }
 
-// Make a copy of an item
+// Allocate and initialize a new item.
+func NewItem(key string, value string) Item {
+	newItem := Item{
+		key:   key,
+		value: value,
+	}
+	return newItem
+}
+
+// Make a copy of an item.
 func (item Item) Copy() Item {
 	newItem := Item{
 		key:                item.key,

@@ -5,34 +5,35 @@
 //           Write merged baseline + user file
 //=============================================================================
 
-package figtree
+package figtree_test
 
 import (
 	"testing"
 
-	"github.com/joehonton/compare-files"
+	"github.com/readwritepro/compare-test-results"
+	"github.com/readwritepro/figtree"
 )
 
-func TestUserWithBaselineFile(t *testing.T) {
+func TestMerge(t *testing.T) {
 	inFilename := "testdata/fixtures/user"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 	if err != nil {
 		t.Fatal()
 	}
 
 	root.SortItems()
 
-	iw := InternalWriter{}
+	wi := figtree.WriteInternal{}
 	outFilename := "testdata/actual/user-internal"
-	err = root.WriteToFile(iw, outFilename)
+	err = root.WriteToFile(wi, outFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 	compare.ExpectedActual(t, "testdata/expected/user-internal", "testdata/actual/user-internal")
 
-	fw := FigtreeWriter{}
+	wf := figtree.WriteFigtree{}
 	outFilename = "testdata/actual/user-figtree"
-	err = root.WriteToFile(fw, outFilename)
+	err = root.WriteToFile(wf, outFilename)
 	if err != nil {
 		t.Errorf(err.Error())
 	}

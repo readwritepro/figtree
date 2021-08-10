@@ -15,7 +15,7 @@ import "strings"
 // (a keyPath containing a slash-separated prefix of branch names).
 //
 // Returns a collection of zero or more items that fully match the keyPath.
-// The items in the collection may contain a mixture of both leaves (strings) and Branches
+// The items in the collection may contain a mixture of both leaves (strings) and Branches.
 func (branch *Branch) QueryAll(keyPath string) []Item {
 	// is this a simpleKeyName or a pathKeyName
 	slash := strings.Index(keyPath, "/")
@@ -196,7 +196,7 @@ func (branch *Branch) GetValue(keyPath string) (string, error) {
 }
 
 // Determines whether an item with the given simpleKeyName exists in this branch.
-// This function only accepts a simpleKeyName.
+// This function only accepts simpleKeyNames, not keyPaths.
 func (branch *Branch) ItemExists(simpleKeyName string) bool {
 	for _, item := range branch.Items {
 		if item.key == simpleKeyName {
@@ -206,7 +206,8 @@ func (branch *Branch) ItemExists(simpleKeyName string) bool {
 	return false
 }
 
-// Returns true if this branch has more than one item with the given simpleKeyName
+// Returns true if this branch has more than one item with the given simpleKeyName.
+// This function only accepts simpleKeyNames, not keyPaths.
 func (branch *Branch) ItemIsArray(simpleKeyName string) bool {
 	count := 0
 	for _, item := range branch.Items {
@@ -217,21 +218,22 @@ func (branch *Branch) ItemIsArray(simpleKeyName string) bool {
 	return count > 1
 }
 
-// Determines whether an item with the given pathKeyName exists in this path.
-// This is a recursive function that searches down a slash-separated keyName path.
-func (branch *Branch) PathExists(pathKeyName string) bool {
+// Determines whether an item with the given keyPath exists in this branch.
+// This is a recursive function that searches down successively deeper branches
+// of a slash-separated keyPath.
+func (branch *Branch) PathExists(keyPath string) bool {
 
 	// discard leading "/" and recurse
-	slash := strings.Index(pathKeyName, "/")
+	slash := strings.Index(keyPath, "/")
 	if slash == 0 {
-		rightSide := pathKeyName[1:]
+		rightSide := keyPath[1:]
 		return branch.PathExists(rightSide)
 	}
 
 	// split in half and recurse
 	if slash != -1 {
-		leftSide := pathKeyName[:slash]
-		rightSide := pathKeyName[slash+1:]
+		leftSide := keyPath[:slash]
+		rightSide := keyPath[slash+1:]
 		for _, item := range branch.Items {
 			if item.key == leftSide {
 				innerBranch := item.value.(*Branch)
@@ -242,5 +244,5 @@ func (branch *Branch) PathExists(pathKeyName string) bool {
 	}
 
 	// return the first leaf that fully matches
-	return branch.ItemExists(pathKeyName)
+	return branch.ItemExists(keyPath)
 }

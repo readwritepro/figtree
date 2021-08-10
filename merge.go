@@ -21,8 +21,7 @@ func mergeBaselineWithUser(baselineTree *Branch, userTree *Branch) *Branch {
 // Make a copy of the branch by copying the items of the current branch
 func (branch *Branch) Copy() *Branch {
 	newBranch := Branch{
-		Items:      make([]Item, 0, len(branch.Items)),
-		branchPath: branch.branchPath,
+		Items: make([]Item, 0, len(branch.Items)),
 	}
 	for _, item := range branch.Items {
 		newItem := item.Copy()
@@ -35,6 +34,10 @@ func (branch *Branch) Copy() *Branch {
 // replacing any item that already exists.
 // Typically the dstBranch object is the baseline tree containing fallback values
 // and the srcBranch is the user's config tree containing explicit overrides.
+//
+// This is a public function and may be called programmatically, but it rarely is.
+// This function is called by ReadConfig in order to merge a baseline config
+// with a user's config.
 func (dstBranch *Branch) Merge(srcBranch *Branch) {
 
 	alreadySeen := make(map[string]bool)

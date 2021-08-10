@@ -6,16 +6,18 @@
 //           Read unmatched opening brace
 //=============================================================================
 
-package figtree
+package figtree_test
 
 import (
 	"fmt"
 	"testing"
+
+	"github.com/readwritepro/figtree"
 )
 
 func TestRead(t *testing.T) {
 	inFilename := "testdata/fixtures/sample"
-	root, err := ReadConfig(inFilename)
+	root, err := figtree.ReadConfig(inFilename)
 
 	var expectedErr error // nil
 	if err != expectedErr {
@@ -31,7 +33,7 @@ func TestRead(t *testing.T) {
 
 func TestMissingInputFile(t *testing.T) {
 	inFilename := "testdata/fixtures/missing-config"
-	_, err := ReadConfig(inFilename)
+	_, err := figtree.ReadConfig(inFilename)
 
 	expectedMsg := fmt.Sprintf("open %s: no such file or directory", inFilename)
 	if expectedMsg != err.Error() {
@@ -41,9 +43,9 @@ func TestMissingInputFile(t *testing.T) {
 
 func TestPrematureClosingBrace(t *testing.T) {
 	inFilename := "testdata/fixtures/premature-closing-brace"
-	_, err := ReadConfig(inFilename)
+	_, err := figtree.ReadConfig(inFilename)
 
-	expectedErr := ErrEndOfBranch
+	expectedErr := figtree.ErrEndOfBranch
 	if expectedErr != err {
 		t.Errorf("expected '%v', got '%v'", expectedErr, err)
 	}
@@ -51,7 +53,7 @@ func TestPrematureClosingBrace(t *testing.T) {
 
 func TestUnmatchedOpeningBrace(t *testing.T) {
 	inFilename := "testdata/fixtures/unmatched-opening-brace"
-	_, err := ReadConfig(inFilename)
+	_, err := figtree.ReadConfig(inFilename)
 
 	if err != nil {
 		t.Errorf("expected 'nil', got '%v'", err)

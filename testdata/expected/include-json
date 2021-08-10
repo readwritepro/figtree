@@ -1,11 +1,11 @@
 {
-	"!include": "/pagoda/portrules/figtree/testdata/fixtures/include-items",
+	"!include": "/pagoda/figtree/testdata/fixtures/include-items",
 	"include1": "value 1",
 	"include2": "value 2",
 	"include3": "value 3",
 	"include4": "value 4",
 	"namedSection-2": {
-		"!include": "/pagoda/portrules/figtree/testdata/fixtures/include-branches",
+		"!include": "/pagoda/figtree/testdata/fixtures/include-branches",
 		"branchA": {
 			"key5": "value 5",
 			"key6": "value 6"
@@ -20,17 +20,17 @@
 		}
 	},
 	"namedSection-3": {
-		"!include": "/pagoda/portrules/figtree/testdata/fixtures/include-includes",
+		"!include": "/pagoda/figtree/testdata/fixtures/include-includes",
 		"file:": "include-includes",
 		"namedSection-4": {
-			"!include": "/pagoda/portrules/figtree/testdata/fixtures/include-items",
+			"!include": "/pagoda/figtree/testdata/fixtures/include-items",
 			"include1": "value 1",
 			"include2": "value 2",
 			"include3": "value 3",
 			"include4": "value 4"
 		},
 		"namedSection-5": {
-			"!include": "/pagoda/portrules/figtree/testdata/fixtures/include-branches",
+			"!include": "/pagoda/figtree/testdata/fixtures/include-branches",
 			"branchA": {
 				"key5": "value 5",
 				"key6": "value 6"

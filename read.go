@@ -16,10 +16,10 @@ import (
 	"path"
 	"strings"
 
-	eh "github.com/joehonton/error-handler"
+	eh "github.com/readwritepro/error-handler"
 )
 
-// ReadConfig a user's configuration file into memory, honoring any !baseline pragma it may contain.
+// The ReadConfig function reads a user's configuration file into memory, honoring any baseline pragma it may contain.
 //
 // Returns the root branch of the tree created by merging the user's file with any baseline file it may point to.
 //
@@ -75,7 +75,7 @@ func ReadFigtree(inFilename string, fileOrigin FileOrigin) (*Branch, error) {
 
 // Recursive function to read lines via a bufio scanner, adding
 // key/value pairs and inner branches to the current branch.
-// This function is typically only called by the ReadFigTree function,
+// This function is typically only called by the ReadFigtree function,
 // but it may safely be called in userland in order to graft one branch onto another.
 //
 // Returns the ErrEndOfBranch sentinal when finished parsing each inner branch.
@@ -170,7 +170,6 @@ func (branch *Branch) ParseBranch(scanner *bufio.Scanner, srcFile string, srcLin
 // The normal return is the sentinal ErrEndOfBranch, anything else should halt further processing
 func (branch *Branch) handleBranch(scanner *bufio.Scanner, key string, blockComments []string, terminalWhitespace string, terminalComment string, srcFile string, srcLine *int, srcOrigin FileOrigin) error {
 	innerBranch := NewBranch()
-	innerBranch.branchPath = branch.branchPath + "/" + key
 	branch.appendItem(key, innerBranch, blockComments, terminalWhitespace, terminalComment, srcFile, srcLine, srcOrigin)
 	return innerBranch.ParseBranch(scanner, srcFile, srcLine, srcOrigin)
 }
@@ -197,7 +196,7 @@ func (branch *Branch) handleKeyValuePair(key string, value string, blockComments
 		if err != nil {
 			return err
 		}
-		TODO(dtdRootBranch)
+		todo(dtdRootBranch)
 	} else {
 		branch.appendItem(key, value, blockComments, terminalWhitespace, terminalComment, srcFile, srcLine, srcOrigin)
 	}

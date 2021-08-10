@@ -1,7 +1,7 @@
 (User)[include-base:4]           # this is a base config file that includes other config files
 (User)[include-base:4]           
 (User)[include-base:4]           #----- 1 include directly -----
-(User)[include-base:4]           !include /pagoda/portrules/figtree/testdata/fixtures/include-items
+(User)[include-base:4]           !include /pagoda/figtree/testdata/fixtures/include-items
 (Incl)[include-items:4]          # file: include-items
 (Incl)[include-items:4]          
 (Incl)[include-items:4]          # four included key/values
@@ -12,7 +12,7 @@
 (User)[include-base:7]           
 (User)[include-base:7]           #----- 2 include as a section -----
 (User)[include-base:7]           namedSection-2 {
-(User)[include-base:8]          	 !include /pagoda/portrules/figtree/testdata/fixtures/include-branches
+(User)[include-base:8]          	 !include /pagoda/figtree/testdata/fixtures/include-branches
 (Incl)[include-branches:3]      	 # file: include-branches
 (Incl)[include-branches:3]      	 
 (Incl)[include-branches:3]      	 branchA {
@@ -34,12 +34,12 @@
 (User)[include-base:12]          
 (User)[include-base:12]          #----- 3 include a file that includes other files -----
 (User)[include-base:12]          namedSection-3 {
-(User)[include-base:13]         	 !include /pagoda/portrules/figtree/testdata/fixtures/include-includes
+(User)[include-base:13]         	 !include /pagoda/figtree/testdata/fixtures/include-includes
 (Incl)[include-includes:1]      	 file: include-includes
 (Incl)[include-includes:4]      	 
 (Incl)[include-includes:4]      	 #----- 4 include items -----
 (Incl)[include-includes:4]      	 namedSection-4 {
-(Incl)[include-includes:5]      		 !include /pagoda/portrules/figtree/testdata/fixtures/include-items
+(Incl)[include-includes:5]      		 !include /pagoda/figtree/testdata/fixtures/include-items
 (Incl)[include-items:4]         		 # file: include-items
 (Incl)[include-items:4]         		 
 (Incl)[include-items:4]         		 # four included key/values
@@ -51,7 +51,7 @@
 (Incl)[include-includes:9]      	 
 (Incl)[include-includes:9]      	 #----- 5 include branches -----
 (Incl)[include-includes:9]      	 namedSection-5 {
-(Incl)[include-includes:10]     		 !include /pagoda/portrules/figtree/testdata/fixtures/include-branches
+(Incl)[include-includes:10]     		 !include /pagoda/figtree/testdata/fixtures/include-branches
 (Incl)[include-branches:3]      		 # file: include-branches
 (Incl)[include-branches:3]      		 
 (Incl)[include-branches:3]      		 branchA {

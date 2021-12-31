@@ -55,7 +55,6 @@ between the opening and closing braces may contain both simple key/value pairs
 and other named sections. Sections may be nested arbitrarily deep. Example:
 
 
-
      ip-settings {
          ip4 {
              inet       179.100.102.215
@@ -74,7 +73,6 @@ function can be used to test whether or not a key has multiple values. The Query
 function can be used to obtain multiple items with the same key. Example:
 
 
-
      name-servers {
          ns ns1.figtree.net
          ns ns2.figtree.net
@@ -84,16 +82,16 @@ function can be used to obtain multiple items with the same key. Example:
 Block comments are written using hashtags as the first non-whitespace character
 of a line. Example:
 
- # All ip-settings are required
+     # All ip-settings are required
 
 Terminal comments may appear on the same line together with key/value pairs when
 whitespace and a hash tag follow the value. Example:
 
  
 
-    hostname    figtree                   # the short device name
-     url        https:www.figtree.io    # protocol, optional port, and DNS name
-     version     1.0                           # minimum required version
+     hostname    figtree                   # the short device name
+     url         https:www.figtree.io      # protocol, optional port, and DNS name
+     version     1.0                       # minimum required version
      reference   allthedocs.org#figtree    # a hashtag embedded within the value (with no preceding space)
     
 # Reading and writing

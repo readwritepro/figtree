@@ -93,7 +93,7 @@ func (branch *Branch) WriteToBuffer(wc WriteConfig) (string, error) {
 }
 
 //-----------------------------------------------------------------------------
-// Writer Figtree
+// Write Figtree
 //-----------------------------------------------------------------------------
 
 // Recursive function to write the current branch, in figtree syntax, to the specified
@@ -145,7 +145,7 @@ func (wf WriteFigtree) serializeConfig(branch *Branch, w *bufio.Writer, depth in
 }
 
 //-----------------------------------------------------------------------------
-// Writer Internal
+// Write Internal
 //-----------------------------------------------------------------------------
 
 // Recursive function to write the current branch with internal debug info to the specified
@@ -202,7 +202,7 @@ func (wi WriteInternal) serializeConfig(branch *Branch, w *bufio.Writer, depth i
 }
 
 //-----------------------------------------------------------------------------
-// Writer JSON
+// Write JSON
 //-----------------------------------------------------------------------------
 
 // Function to write the current branch, in JSON syntax, to the specified
@@ -387,7 +387,7 @@ func escapeJsonValue(unescaped string) string {
 }
 
 //-----------------------------------------------------------------------------
-// Writer YAML
+// Write YAML
 //-----------------------------------------------------------------------------
 
 // Function to write the current branch, in YAML syntax, to the specified

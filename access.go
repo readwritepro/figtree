@@ -2,15 +2,19 @@
 // File:     access.go
 // Contents: Functions for querying and retreiving the figtree hierarchy
 //           QueryAll, QueryOne
-//           GetItem, GetBranch, GetValue
-//           ItemExists, ItemIsArray, PathExists
+//           ListBranches, ListLeaves, ItemCount
+//           GetItem, GetBranch, GetLeaf, GetValue
+//           ItemExists, ItemIsBranch, ItemIsLeaf, ItemIsArray, PathExists
 //=============================================================================
 
 package figtree
 
-import "strings"
+import (
+	"strings"
+)
 
 // Find all items with the given key path.
+// This method provides access to multiple items functioning like an array.
 // The keyPath argument may be a "simpleKeyName" or a "keyPath"
 // (a keyPath containing a slash-separated prefix of branch names).
 //
@@ -104,11 +108,40 @@ func (branch *Branch) QueryOne(keyPath string) (*Item, error) {
 	return nil, ErrNotFound
 }
 
+// Get all sub-branches of the current branch
+// Returns a collection of zero or more subordinate branches
+func (branch *Branch) ListBranches() []Item {
+	var subBranches []Item
+
+	for _, item := range branch.Items {
+		if item.Type() == "[branch]" {
+			subBranches = append(subBranches, item)
+		}
+	}
+
+	return subBranches
+}
+
+// Get all leaves of the current branch
+// Returns a collection of zero or more leaf items
+func (branch *Branch) ListLeaves() []Item {
+	var leaves []Item
+
+	for _, item := range branch.Items {
+		if item.Type() == "[leaf]" {
+			leaves = append(leaves, item)
+		}
+	}
+
+	return leaves
+}
+
 // Get the item with the given keyPath.
 // The keyPath argument may be a "simpleKeyName" or a "keyPath"
 // (a keyPath containing a slash-separated prefix of branch names).
 //
 // Returns ErrNotFound when the keyPath does not exist.
+// Returns ErrNotLeaf if the keyPath points to a leaf rather than a branch.
 func (branch *Branch) GetItem(keyPath string) (*Item, error) {
 	// is this a simpleKeyName or a pathKeyName
 	slash := strings.Index(keyPath, "/")
@@ -168,8 +201,31 @@ func (branch *Branch) GetBranch(keyPath string) (*Branch, error) {
 		return nil, ErrNotBranch // last part of the Path is a leaf
 	case *Branch:
 		return value, nil // last part of the Path is a *Branch
+	default:
+		return nil, ErrNotBranch
 	}
-	return nil, err
+}
+
+// Get the leaf with the given keyPath.
+// The keyPath argument may be a "simpleKeyName" or a "keyPath"
+// (a keyPath containing a slash-separated prefix of branch names).
+//
+// Returns ErrNotFound when the keyPath does not exist.
+// Returns ErrNotLeaf if the keyPath points to a branch rather than a leaf.
+func (branch *Branch) GetLeaf(keyPath string) (*Item, error) {
+	item, err := branch.QueryOne(keyPath)
+	if err != nil {
+		return nil, err
+	}
+
+	switch item.value.(type) {
+	case string:
+		return item, nil // last part of the Path is a leaf
+	case *Branch:
+		return nil, ErrNotLeaf // last part of the Path is a *Branch
+	default:
+		return nil, ErrNotLeaf
+	}
 }
 
 // Find the value of the item with the given keyPath.
@@ -191,8 +247,9 @@ func (branch *Branch) GetValue(keyPath string) (string, error) {
 		return value, nil // last part of the Path is a leaf
 	case *Branch:
 		return "", ErrNotLeaf // last part of the Path is a *Branch
+	default:
+		return "", err
 	}
-	return "", err
 }
 
 // Determines whether an item with the given simpleKeyName exists in this branch.
@@ -204,6 +261,44 @@ func (branch *Branch) ItemExists(simpleKeyName string) bool {
 		}
 	}
 	return false
+}
+
+// Determines whether an item is a branch
+// The keyPath argument may be a "simpleKeyName" or a "keyPath"
+// (a keyPath containing a slash-separated prefix of branch names).
+func (branch *Branch) ItemIsBranch(keyPath string) bool {
+	item, err := branch.QueryOne(keyPath)
+	if err != nil {
+		return false
+	}
+
+	switch item.value.(type) {
+	case string:
+		return false
+	case *Branch:
+		return true
+	default:
+		return false
+	}
+}
+
+// Determines whether an item is a leaf
+// The keyPath argument may be a "simpleKeyName" or a "keyPath"
+// (a keyPath containing a slash-separated prefix of branch names).
+func (branch *Branch) ItemIsLeaf(keyPath string) bool {
+	item, err := branch.QueryOne(keyPath)
+	if err != nil {
+		return false
+	}
+
+	switch item.value.(type) {
+	case string:
+		return true
+	case *Branch:
+		return false
+	default:
+		return false
+	}
 }
 
 // Returns true if this branch has more than one item with the given simpleKeyName.

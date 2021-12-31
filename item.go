@@ -65,6 +65,19 @@ func (item Item) Type() string {
 	return ""
 }
 
+// Returns the number of items in the branch
+// Returns 0 if the item is a leaf
+func (item Item) ItemCount() int {
+	switch value := item.value.(type) {
+	case string:
+		return 0
+	case *Branch:
+		return value.ItemCount()
+	default:
+		return 0
+	}
+}
+
 // Get the item's key.
 func (item Item) Key() string {
 	return item.key

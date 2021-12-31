@@ -21,5 +21,10 @@ func NewBranch() *Branch {
 	return &branch
 }
 
+// Returns the number of items in the branch
+func (branch *Branch) ItemCount() int {
+	return len(branch.Items)
+}
+
 var gBaselineTree *Branch // pointer to the tree of items built by the !baseline pragma, if any
 var gDtdTree *Branch      // pointer to the tree of items built by the !dtd pragma, if any
